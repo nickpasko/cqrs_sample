@@ -11,6 +11,7 @@ cmake-build-debug/
 .idea
 out/
 *.iml
+target/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
