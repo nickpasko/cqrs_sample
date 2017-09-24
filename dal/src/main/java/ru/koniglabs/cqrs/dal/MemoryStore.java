@@ -13,7 +13,7 @@ import static ru.koniglabs.cqrs.common.helpers.SyntacticSugar.ifNull;
  * Created by nikolay on 24.09.17.
  */
 public class MemoryStore {
-    private volatile Map<UUID, MonitoredObjectDal> monitoredObjects;
+    private static volatile Map<UUID, MonitoredObjectDal> monitoredObjects;
 
     private static MemoryStore instance = null;
     private static final Object lock = new Object();
@@ -41,7 +41,6 @@ public class MemoryStore {
     public void deleteMonitoredObject(UUID moId) {
         monitoredObjects.remove(moId);
     }
-
 
     public MonitoredObjectDal getMonitoredObjectByUuid(UUID uuid) {
         return monitoredObjects.get(uuid);

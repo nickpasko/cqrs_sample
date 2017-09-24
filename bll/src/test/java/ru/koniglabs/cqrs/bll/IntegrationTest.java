@@ -1,13 +1,12 @@
 package ru.koniglabs.cqrs.bll;
 
 import org.junit.Test;
-import ru.koniglabs.cqrs.bll.factories.CreateMonitoredObjectCommandHandlersFactory;
-import ru.koniglabs.cqrs.bll.factories.DeleteMonitoredObjectCommandHandlersFactory;
-import ru.koniglabs.cqrs.bll.factories.UpdateMonitoredObjectCommandHandlersFactory;
+import ru.koniglabs.cqrs.bll.factories.CommandHandlersContainer;
 import ru.koniglabs.cqrs.common.bll_commands.CreateMonitoredObjectCommand;
 import ru.koniglabs.cqrs.common.bll_commands.DeleteMonitoredObjectCommand;
 import ru.koniglabs.cqrs.common.bll_commands.UpdateMonitoredObjectCommand;
-import ru.koniglabs.cqrs.common.interfaces.ICreateCommandHandlers;
+import ru.koniglabs.cqrs.common.interfaces.AbstractCommand;
+import ru.koniglabs.cqrs.common.interfaces.IContainCommandHandlers;
 import ru.koniglabs.cqrs.common.interfaces.IHandleCommands;
 import ru.koniglabs.cqrs.dal.MemoryStore;
 
@@ -22,36 +21,36 @@ import static org.junit.Assert.assertNull;
 public class IntegrationTest {
     @Test
     public void testCreate_Update_DeleteMo_Ok() {
-        ICreateCommandHandlers handlerFactory = new CreateMonitoredObjectCommandHandlersFactory();
+        IContainCommandHandlers handlerFactory = new CommandHandlersContainer();
         IHandleCommands handler = handlerFactory.create();
-        CreateMonitoredObjectCommand createCmd = CreateMonitoredObjectCommand
+        AbstractCommand cmd = CreateMonitoredObjectCommand
                 .builder()
                     .host("localhost")
                     .name("bebebe")
                     .description("test MO 1")
                     .build();
-        handler.execute(createCmd);
+        handler.execute(cmd);
         UUID newMoId = MemoryStore.getInstance().getMonitoredObjects().get(0).getUuid();
 
         handlerFactory = new UpdateMonitoredObjectCommandHandlersFactory();
         handler = handlerFactory.create();
-        UpdateMonitoredObjectCommand updateCmd = UpdateMonitoredObjectCommand
+        cmd = UpdateMonitoredObjectCommand
                 .builder()
                 .uuid(newMoId)
                 .host("localhost")
                 .name("bebebe2")
                 .description("test MO 1")
                 .build();
-        handler.execute(updateCmd);
+        handler.execute(cmd);
         assertEquals("bebebe2", MemoryStore.getInstance().getMonitoredObjectByUuid(newMoId).getName());
 
         handlerFactory = new DeleteMonitoredObjectCommandHandlersFactory();
         handler = handlerFactory.create();
-        DeleteMonitoredObjectCommand deleteCmd = DeleteMonitoredObjectCommand
+        cmd = DeleteMonitoredObjectCommand
                 .builder()
                 .uuid(newMoId)
                 .build();
-        handler.execute(deleteCmd);
+        handler.execute(cmd);
         assertNull(MemoryStore.getInstance().getMonitoredObjectByUuid(newMoId));
     }
 }
