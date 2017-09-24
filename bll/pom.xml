@@ -14,17 +14,30 @@
         <dependency>
             <groupId>ru.koniglabs.samples.java.cqrs</groupId>
             <artifactId>interfaces</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>ru.koniglabs.samples.java.cqrs</groupId>
             <artifactId>dal_pojo</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>ru.koniglabs.samples.java.cqrs</groupId>
             <artifactId>bll_pojo</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.koniglabs.samples.java.cqrs</groupId>
+            <artifactId>dal</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
