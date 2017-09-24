@@ -9,5 +9,16 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>presentation_layer/controllers</module>
+        <module>presentation_layer/viewmodels</module>
+        <module>business_logc_layer/dtos</module>
+        <module>business_logc_layer/model</module>
+        <module>data_access_layer/pojos</module>
+        <module>data_access_layer/handlers</module>
+        <module>common/viewmodel_mappers</module>
+        <module>common/dto_mappers</module>
+    </modules>
+
 
 </project>
